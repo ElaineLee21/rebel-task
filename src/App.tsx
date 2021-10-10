@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import List from './pages/List';
+import Detail from './pages/Detail';
+import Episode from './pages/Episode';
 
 function App() {
+  //useEffect해서 켜지자 마자 List 렌더링 되게 하자
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+      <Switch>
+        <Route exact path="/contents" component={List} />
+        <Route exact path="/contents/id" component={Detail} />
+        <Route exact path="/episodes/id" component={Episode} />
+      </Switch>
+      </BrowserRouter>
     </div>
   );
 }
