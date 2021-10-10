@@ -13,7 +13,7 @@ const Image = (props:any) => {
 
   return (
     <React.Fragment>
-      <ImageDefault {...styles}></ImageDefault>
+      <ImageDefault {...styles} onClick={_onClick}></ImageDefault>
     </React.Fragment>
   );
 };

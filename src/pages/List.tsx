@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import theme from '../theme';
 
@@ -6,7 +6,8 @@ import ContentsItem from '../components/ContentsItem';
 import Header from '../components/Header'
 import Button from '../elements/Button';
 
-const List = () => {
+const List = (props:any) => {
+  
   return (
     <>
       <Header />
