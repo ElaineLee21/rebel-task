@@ -1,26 +1,66 @@
-import React from 'react';
-import styled from "styled-components";
-import theme from '../theme';
+import React, { useState } from "react";
+import { history } from "../index";
 
-import Image from '../elements/Image';
-import rebelcorplogo from '../assets/rebelcorplogo.png';
-import whitesearch from '../assets/whitesearch.png';
+import styled from "styled-components";
+import theme from "../theme";
+
+import Button from "../elements/Button";
+import Image from "../elements/Image";
+import rebelcorplogo from "../assets/rebelcorplogo.png";
+
+import contents from "../contents";
 
 const Header = () => {
+  const [search, setSearch] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    searchTitle(search);
+    setSearch("");
+  };
+
+  //일단 해당 제목의 인덱스 번호를 console에 찍히게 했음!
+  const searchTitle = (search: string) => {
+    let result = -1;
+    for (let i = 0; i < contents.length; i++) {
+      if (search === contents[i].title) {
+        result = i;
+      }
+    }
+    history.push(`/contents/${contents[result].id}`);
+  };
+
   return (
     <>
-     <Wrapper>
-       <Image src={rebelcorplogo} width="100px" height="100px"/>
-       <SearchWrapper>
-         <Search placeholder="search by title"></Search>
-         <SearchIconWrapper>
-           <SearchIcon src={whitesearch} />
-          </SearchIconWrapper>
-       </SearchWrapper>
-     </Wrapper>
+      <Wrapper>
+        <Image
+          src={rebelcorplogo}
+          width="100px"
+          height="100px"
+          _onClick={() => {
+            history.push("/");
+          }}
+        />
+        <SearchWrapper onSubmit={handleSubmit}>
+          <Search
+            type="text"
+            placeholder="search by title"
+            id="search"
+            value={search}
+            onChange={handleChange}
+          />
+          <Button type="submit" bg="white" color={theme.typoBlack} width="65px">
+            search
+          </Button>
+        </SearchWrapper>
+      </Wrapper>
     </>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   background-color: black;
@@ -29,9 +69,9 @@ const Wrapper = styled.div`
   padding: 0 20%;
   display: flex;
   justify-content: space-between;
-`
+`;
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.form`
   width: auto;
   height: 30px;
   display: flex;
@@ -39,7 +79,7 @@ const SearchWrapper = styled.div`
   align-items: center;
   margin: auto 0;
   box-sizing: border-box;
-`
+`;
 
 const Search = styled.input`
   width: 250px;
@@ -53,16 +93,6 @@ const Search = styled.input`
   &:focus {
     outline: none;
   }
-`
+`;
 
-const SearchIconWrapper = styled.div`
-  
-  box-sizing: border-box;
-`
-
-const SearchIcon = styled.img`
-  max-width: 30px;
-  max-height: 30px;
-`
-
-export default Header
+export default Header;

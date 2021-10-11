@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import theme from '../theme';
 
-const Episode = () => {
+const Viewer = () => {
   return (
     <>
     <ViewerWrapper>
@@ -54,4 +54,4 @@ const EpisodeNovel = styled.div`
   font-size: 18px;
 `
 
-export default Episode
+export default Viewer;
