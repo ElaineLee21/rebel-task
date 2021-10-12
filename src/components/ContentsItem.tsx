@@ -7,10 +7,7 @@ import { Content } from "../contents";
 
 import Image from "../elements/Image";
 import { useDispatch } from "react-redux";
-import {
-  selectCurrentContent,
-  updateCurrentContent,
-} from "../redux/modules/content";
+import { updateCurrentContent } from "../redux/modules/content";
 
 const ContentsItem = ({ content }: { content: Content }) => {
   useEffect(() => {}, []);

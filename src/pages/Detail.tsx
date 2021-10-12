@@ -7,11 +7,7 @@ import EpisodeItem from "../components/EpisodeItem";
 
 import contents, { Content } from "../contents";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectContents,
-  selectCurrentContent,
-  updateCurrentEpisode,
-} from "../redux/modules/content";
+import { selectContents, selectCurrentContent } from "../redux/modules/content";
 
 const Detail = (props: any) => {
   // url에서 id값을 따온다

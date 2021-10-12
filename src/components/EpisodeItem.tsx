@@ -9,11 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Episode } from "../contents";
 import {
   selectCurrentContent,
-  selectCurrentEpisode,
   updateCurrentEpisode,
   updateEpisodeIsBuy,
 } from "../redux/modules/content";
-import { selectModal } from "../redux/modules/modal";
 import Modal from "./Modal";
 
 const EpisodeItem = ({ episode }: { episode: Episode }) => {

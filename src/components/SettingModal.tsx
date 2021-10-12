@@ -1,8 +1,5 @@
 import React from "react";
-import theme from "../theme";
 import styled from "styled-components";
-import Button from "../elements/Button";
-import { Episode } from "../contents";
 
 interface SettingModal {
   closeModal: () => void;
