@@ -1,30 +1,34 @@
 import React, { useEffect } from "react";
+import { history } from "../index";
+
 import styled from "styled-components";
 import theme from "../theme";
 import { Content } from "../contents";
 
 import Image from "../elements/Image";
+import { useDispatch } from "react-redux";
+import {
+  selectCurrentContent,
+  updateCurrentContent,
+} from "../redux/modules/content";
 
-const ContentsItem: React.FunctionComponent<Content> = ({
-  id,
-  title,
-  image,
-  like,
-  status,
-  summary,
-}) => {
+const ContentsItem = ({ content }: { content: Content }) => {
   useEffect(() => {}, []);
 
+  const dispatch = useDispatch();
+  const onClickContent = () => {
+    dispatch(updateCurrentContent(content.id));
+    history.push(`/contents/${content.id}`);
+  };
   return (
     <>
       <Wrapper>
-        <Image src={image} />
-
+        <Image src={content.image} _onClick={onClickContent} />
         <RightWrapper>
-          <Title>{title}</Title>
+          <Title onClick={onClickContent}>{content.title}</Title>
           <InfoWrapper>
-            <Info>{status}</Info>
-            <Info>♥ {like}</Info>
+            <Info>{content.status}</Info>
+            <Info>♥ {content.like}</Info>
           </InfoWrapper>
         </RightWrapper>
       </Wrapper>
@@ -57,6 +61,9 @@ const Title = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: ${theme.mediumFont};
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const InfoWrapper = styled.div`

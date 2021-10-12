@@ -8,9 +8,13 @@ import Button from "../elements/Button";
 import Image from "../elements/Image";
 import rebelcorplogo from "../assets/rebelcorplogo.png";
 
-import contents from "../contents";
+import contents, { Content } from "../contents";
 
-const Header = () => {
+interface Header {
+  setContentList: (contents: Content[]) => void;
+}
+
+const Header = ({ setContentList }: Header) => {
   const [search, setSearch] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,15 +27,14 @@ const Header = () => {
     setSearch("");
   };
 
-  //일단 해당 제목의 인덱스 번호를 console에 찍히게 했음!
   const searchTitle = (search: string) => {
-    let result = -1;
+    let result = [];
     for (let i = 0; i < contents.length; i++) {
       if (search === contents[i].title) {
-        result = i;
+        result.push(contents[i]);
       }
     }
-    history.push(`/contents/${contents[result].id}`);
+    setContentList(result);
   };
 
   return (

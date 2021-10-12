@@ -7,30 +7,50 @@ import EpisodeItem from "../components/EpisodeItem";
 import Header from "../components/Header";
 
 import contents, { Content } from "../contents";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectContents,
+  selectCurrentContent,
+  updateCurrentEpisode,
+} from "../redux/modules/content";
 
 const Detail = (props: any) => {
   // url에서 id값을 따온다
   const contentsId = props.location.pathname.split("/contents/")[1];
 
-  useEffect(() => {
-    const el = contents.find((el) => el.id === contentsId);
-    if (!el) return;
-    setContentsItem(el);
-  }, []);
+  const dispatch = useDispatch();
+  const currentContentId = useSelector(selectCurrentContent);
+  const contents = useSelector(selectContents);
+  console.log("currentContent", currentContentId);
 
   const [contentsItem, setContentsItem] = useState<Content | undefined>(
     undefined
   );
 
+  useEffect(() => {
+    const el = contents.find((el) => el.id === contentsId);
+    if (!el) return;
+    setContentsItem(el);
+  }, [contents]);
+  //[contents]가 있어야 isBuy의 상태가 바뀌었을 때 버튼스타일이 반영됨! 바뀌는 상태는 [ ]안에 넣자~
+
   return (
     <>
       <Wrapper>
-        <Header />
+        {/* <Header setContentList={} /> */}
         <ContentsWrapper>
-          {contentsItem && <ContentsItem {...contentsItem} />}
+          {contentsItem && <ContentsItem content={contentsItem} />}
           <SummaryWrapper>{contentsItem?.summary}</SummaryWrapper>
           <BoldLine />
-          <EpisodeItem />
+          {/* {contentsItem && <EpisodeItem {...contentsItem} />} */}
+          {contentsItem &&
+            contentsItem.episodes?.map((episode, index) => {
+              return (
+                <div key={episode.id}>
+                  <EpisodeItem episode={episode} />
+                </div>
+              );
+            })}
         </ContentsWrapper>
       </Wrapper>
     </>
