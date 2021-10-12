@@ -23,7 +23,11 @@ const Modal = ({ closeModal, onClickEpisodeItem, episode }: Modal) => {
             X
           </Xbutton>
           {episode.title}
-          <Button margin="20px 0" height="50px" _onClick={onClickEpisodeItem}>
+          <Button
+            margin="20px 0"
+            height={theme.bigBtnHeight}
+            _onClick={onClickEpisodeItem}
+          >
             <div>Buy</div>
             <div>{episode.price} coins</div>
           </Button>
@@ -61,7 +65,6 @@ const ModalEl = styled.div`
   padding: 40px;
 `;
 
-// 얘는 (자식인)로그인, 설문조사, 회원가입에 다 들어가는 버튼이라서, 부모인 이곳에 넣어놨습니다!
 const Xbutton = styled.div`
   margin: 0 0 0 auto;
   &:hover {

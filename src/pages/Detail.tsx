@@ -4,7 +4,6 @@ import theme from "../theme";
 
 import ContentsItem from "../components/ContentsItem";
 import EpisodeItem from "../components/EpisodeItem";
-import Header from "../components/Header";
 
 import contents, { Content } from "../contents";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +36,6 @@ const Detail = (props: any) => {
   return (
     <>
       <Wrapper>
-        {/* <Header setContentList={} /> */}
         <ContentsWrapper>
           {contentsItem && <ContentsItem content={contentsItem} />}
           <SummaryWrapper>{contentsItem?.summary}</SummaryWrapper>
